@@ -13,7 +13,7 @@ class Auth:
     """Base class to manage the API authentication"""
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
-        Determine if path requires authentication
+        Determine if path requires authentication based on the excluded paths.
         Return:
                 bool
         """
