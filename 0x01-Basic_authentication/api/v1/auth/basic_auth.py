@@ -21,9 +21,3 @@ class BasicAuth(Auth):
         # Extract the part after "Basic"
         cred_header = authorization_header[len("Basic "):]
         return cred_header.strip()
-
-        """
-        Encode the extracted part to Base64
-        base64_encoded = base64.b64encode(cred_header.encode('utf-8'))
-        return base64_encoded.decode('utf-8')
-        """
