@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-BasicAuth module for hadnling Basic HTTP Authentication.
+""" BasicAuth module for hadnling Basic HTTP Authentication.
 
 Provides a class that inherits from the 'AUth' class.
 """
@@ -10,8 +9,7 @@ import base64
 
 
 class BasicAuth(Auth):
-    """
-    BasicAuth class that inherits from Auth.
+    """ BasicAuth class that inherits from Auth.
 
     This class provides methods to handle Basic HTTP Authentication,
     including extracting and decoding authorization headers.
@@ -34,6 +32,7 @@ class BasicAuth(Auth):
             return None
         if not authorization_header.startswith("Basic "):
             return None
+
         # Extract the part after "Basic"
         cred_header = authorization_header[len("Basic "):]
         return cred_header.strip()
