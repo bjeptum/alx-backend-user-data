@@ -10,7 +10,7 @@ class BasicAuth(Auth):
     """BasicAuth class that inherits from Auth."""
     def extract_base64_authorization_header(self, authorization_header: str) -> str:
         """
-        Extract the authorizationation_header.
+        Extract the authorization_header.
 
         Returns:
                 Base64 part of the header
@@ -24,4 +24,15 @@ class BasicAuth(Auth):
         # Extract the part after "Basic"
         cred_header = authorization_header[len("Basic "):]
         return cred_header.strip()
-    
+
+    def decode_base64_authorization_header(self, base64_authorization_header: str) -> str:
+        """Returns the decoded Base64 part of the header """
+        if base64_authorization_header is None:
+            return None
+        if not isinstance(base64_authorization_header, str):
+            return None
+        try:
+            decoded_bytes = base64.b64decode(base64_authorization_header)
+            return decoded_bytes('utf-8')
+        except (base64.binascii.Error, UnicodeDecodeError):
+            return None
