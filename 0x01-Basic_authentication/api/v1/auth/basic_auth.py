@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-""" BasicAuth module for hadnling Basic HTTP Authentication.
-
-Provides a class that inherits from the 'AUth' class.
+"""
+BasicAuth module for handling Basic HTTP Authentication.py.
 """
 from api.v1.auth.auth import Auth
-from flask import Flask, request, Response
 import base64
 
 
@@ -23,7 +21,7 @@ class BasicAuth(Auth):
         Args:
             authorization_header (str)
 
-        Returns:
+        Return:
             str: The Base64-encoded part of the header, or None.
         """
         if authorization_header is None:
@@ -49,7 +47,7 @@ class BasicAuth(Auth):
             str: The decoded string.
 
         Exceptions:
-            - Returns None if the input is None or not a valid Base64 string.
+            Returns None if the input is None or not a valid Base64 string.
         """
         if base64_authorization_header is None:
             return None
