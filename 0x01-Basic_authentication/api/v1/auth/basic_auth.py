@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""BasicAuth module.
+"""
+BasicAuth module for hadnling Basic HTTP Authentication.
+
+Provides a class that inherits from the 'AUth' class.
 """
 from api.v1.auth.auth import Auth
 from flask import Flask, request, Response
@@ -7,13 +10,23 @@ import base64
 
 
 class BasicAuth(Auth):
-    """BasicAuth class that inherits from Auth."""
-    def extract_base64_authorization_header(self, authorization_header: str) -> str:
+    """
+    BasicAuth class that inherits from Auth.
+
+    This class provides methods to handle Basic HTTP Authentication,
+    including extracting and decoding authorization headers.
+    """
+
+    def extract_base64_authorization_header(self,
+                                            authorization_header: str) -> str:
         """
-        Extract the authorization_header.
+        Extract the Base64 part of the Authorization header.
+
+        Args:
+            authorization_header (str)
 
         Returns:
-                Base64 part of the header
+            str: The Base64-encoded part of the header, or None.
         """
         if authorization_header is None:
             return None
@@ -25,8 +38,20 @@ class BasicAuth(Auth):
         cred_header = authorization_header[len("Basic "):]
         return cred_header.strip()
 
-    def decode_base64_authorization_header(self, base64_authorization_header: str) -> str:
-        """Returns the decoded Base64 part of the header """
+    def decode_base64_authorization_header(self, base64_authorization_header:
+                                           str) -> str:
+        """
+        Decode the Base64-encoded part of the Authorization header.
+
+        Args:
+            base64_authorization_header (str).
+
+        Returns:
+            str: The decoded string.
+
+        Exceptions:
+            - Returns None if the input is None or not a valid Base64 string.
+        """
         if base64_authorization_header is None:
             return None
         if not isinstance(base64_authorization_header, str):
