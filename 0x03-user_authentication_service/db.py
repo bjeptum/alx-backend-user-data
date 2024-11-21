@@ -53,3 +53,24 @@ class DB:
             raise NoResultFound
         except InvalidRequestError:
             raise InvalidRequestError
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """Updates user based on provided kwargs
+
+        Args:
+            user_id(int):The ID of user to be updated
+            **kwargs: keyword arguments for user attributes to update
+        """
+        valid_attributes = {"email", "hashed_password"}
+
+        # Find user by user_id
+        user = self.find_user(id=user_id)
+
+        # Update attributes
+        for key, value in kwargs.items():
+            if key not in allowed_attributes:
+                raise ValueError
+            setattr(user, key, value)
+
+        # Commit changes to the database
+        self._session.commit()
