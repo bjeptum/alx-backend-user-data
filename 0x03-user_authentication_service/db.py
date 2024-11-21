@@ -34,6 +34,8 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """Add and save new user to the database.
         """
+        if not email or hashed_password:
+            return
         new_user = User(email=email, hashed_password=hashed_password)
         self._session.add(new_user)
         self._session.commit()
@@ -41,6 +43,8 @@ class DB:
 
     def find_user_by(self, **kwargs) -> User:
         """Find the first user matching the args"""
+        if not kwargs:
+            return InvalidRequestError
         try:
             # QUery User table with filters
             user = self._session.query(User).filter_by(**kwargs).one()
